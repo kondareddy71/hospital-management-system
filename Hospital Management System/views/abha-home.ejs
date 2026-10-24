@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABHA - Universal Health Coverage Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .navbar {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .badge-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        button, .button {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #f9f9f9;
+            transform: translateY(-3px);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .stats-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stats-section h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .video-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .video-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .video-placeholder {
+            background: #f0f0f0;
+            width: 100%;
+            max-width: 600px;
+            height: 350px;
+            margin: 0 auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        
+        .abha-id-entry {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .abha-id-entry h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .abha-input-group {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .abha-input-group button {
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+        }
+        
+        .footer {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 40px;
+        }
+        
+        .uhc-highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .uhc-highlight strong {
+            color: #f57f17;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>🏥 Pharmacist Hospital - ABHA System</h1>
+        <div>
+            <a href="/login" style="color: white; text-decoration: none; margin-right: 15px;">Login</a>
+            <a href="/register" style="color: white; text-decoration: none;">Register</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h2>ABHA - Ayushman Bharat Health Account</h2>
+            <p>Your medical history travels with you. Access your health records anywhere in India.</p>
+            <div class="badge-group">
+                <span class="badge">🌍 Universal Health Coverage</span>
+                <span class="badge">🔒 Secure & Encrypted</span>
+                <span class="badge">📱 Mobile First</span>
+                <span class="badge">⚡ Instant Access</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="/abha-register" class="button btn-primary">📝 Create ABHA ID</a>
+                <a href="/" class="button btn-secondary">← Back to Hospital</a>
+            </div>
+        </div>
+        
+        <!-- UHC Highlight -->
+        <div class="uhc-highlight">
+            <strong>What is ABHA?</strong>
+            ABHA is a <strong>14-digit unique health identification number</strong> that enables your complete medical history to be portable across the entire Indian healthcare system. 
+            Whether you visit a hospital in Delhi or a clinic in Mumbai, your doctor can instantly access your prescriptions, test results, and medical history.
+        </div>
+        
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Nationwide Portability</h3>
+                <p>Your ABHA ID works across all hospitals, clinics, and pharmacies in India. No region restrictions.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Secure & Private</h3>
+                <p>Military-grade encryption protects your health data. Only you control who can access your records.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Emergency Access</h3>
+                <p>Emergency doctors instantly see your blood type, allergies, and critical medical history during critical moments.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💊</div>
+                <h3>Paperless Pharmacy</h3>
+                <p>No more paper prescriptions. Any pharmacy can see your active prescriptions and dispense medication instantly.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Complete Health History</h3>
+                <p>One unified view of all your medical visits, tests, diagnoses, medicines, and treatment records.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile & Online Access</h3>
+                <p>View your health records anytime, anywhere on your mobile phone or computer through a secure portal.</p>
+            </div>
+        </div>
+        
+        <!-- Statistics -->
+        <div class="stats-section">
+            <h3>ABHA System at a Glance</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50M+</div>
+                    <div class="stat-label">ABHA IDs Created</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">Data Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Integrated Hospitals</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ABHA ID Lookup -->
+        <div class="abha-id-entry">
+            <h3>🔍 Access Your Health Records</h3>
+            <p style="color: #666; margin-bottom: 15px; font-size: 14px;">
+                Already have an ABHA ID? Enter it to view your portable health records across all healthcare providers.
+            </p>
+            <div class="abha-input-group">
+                <input type="text" id="abhaIdInput" placeholder="Enter ABHA ID (XX-XXXX-XXXX-XXXX)" 
+                       pattern="[0-9]{2}-[0-9]{4}-[0-9]{4}-[0-9]{4}">
+                <button onclick="viewABHADashboard()">View Records</button>
+            </div>
+        </div>
+        
+        <!-- Global Comparison -->
+        <div style="background: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+            <h3 style="color: #333; margin-bottom: 20px;">Global Digital Health Systems (2026)</h3>
+            <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                <tr style="background: #f5f5f5;">
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Country</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">System</th>
+                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #ddd;">Key Feature</th>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 12px;">🇮🇳 India</td>
+                    <td style="padding: 12px;"><strong>ABHA/ABDM</strong></td>
+                    <td style="padding: 12px;">Nationwide portability & consent-based sharing</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd; background: #f9f9f9;">
+                    <td style="padding: 12px;">🇪🇺 European Union</td>
+                    <td style="padding: 12px;"><strong>EHDS</strong></td>
+                    <td style="padding: 12px;">Cross-border healthcare (27 EU countries)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 12px;">🇪🇪 Estonia</td>
+                    <td style="padding: 12px;"><strong>e-Health</strong></td>
+                    <td style="padding: 12px;">Blockchain security & 100% paperless</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd; background: #f9f9f9;">
+                    <td style="padding: 12px;">🇦🇺 Australia</td>
+                    <td style="padding: 12px;"><strong>My Health Record</strong></td>
+                    <td style="padding: 12px;">Active Script (paperless pharmacy)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">🇸🇬 Singapore</td>
+                    <td style="padding: 12px;"><strong>HealthHub</strong></td>
+                    <td style="padding: 12px;">Unified login with National ID</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                ABHA is part of Ayushman Bharat - Digital Mission (ABDM), India's flagship initiative for Universal Health Coverage.<br>
+                Your health data is encrypted, secure, and under your complete control.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function viewABHADashboard() {
+            const abhaId = document.getElementById('abhaIdInput').value.trim();
+            
+            if (!abhaId) {
+                alert('Please enter an ABHA ID');
+                return;
+            }
+            
+            // Validate ABHA format: XX-XXXX-XXXX-XXXX
+            const regex = /^\d{2}-\d{4}-\d{4}-\d{4}$/;
+            if (!regex.test(abhaId)) {
+                alert('Invalid ABHA ID format. Use: XX-XXXX-XXXX-XXXX');
+                return;
+            }
+            
+            window.location.href = `/abha-dashboard?abhaId=${encodeURIComponent(abhaId)}`;
+        }
+        
+        // Allow Enter key
+        document.getElementById('abhaIdInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') viewABHADashboard();
+        });
+    </script>
+</body>
+</html>

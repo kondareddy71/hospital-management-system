@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABHA Health Records - Portable Medical History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .navbar h1 {
+            font-size: 24px;
+        }
+        
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .navbar a:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .abha-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid #667eea;
+        }
+        
+        .abha-header h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .abha-id-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .abha-id-card .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        .abha-id-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            letter-spacing: 3px;
+        }
+        
+        .abha-id-card .registered {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        
+        .patient-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .info-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .info-value {
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .consent-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .consent-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .consent-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .consent-item.granted {
+            background: #f1f8e9;
+            border-left-color: #4caf50;
+        }
+        
+        .consent-text {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .consent-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .consent-status.granted {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        .consent-status.denied {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+        
+        .medical-history {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .medical-history h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .history-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .history-date {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .history-disease {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .history-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        
+        .detail-item {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .detail-label {
+            color: #999;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .detail-value {
+            color: #333;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            opacity: 0.3;
+            margin-bottom: 15px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .uparking-feature {
+            background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .uparking-feature h4 {
+            margin-bottom: 10px;
+        }
+        
+        .uparking-feature p {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>🏥 ABHA Health Dashboard</h1>
+        <a href="/">← Back to Home</a>
+    </div>
+    
+    <div class="container">
+        <!-- ABHA Header Section -->
+        <div class="abha-header">
+            <h2>Portable Health Records (PHR)</h2>
+            
+            <div class="abha-id-card">
+                <div class="label">ABHA ID (Universal Health Coverage Number)</div>
+                <div class="value"><%= record.abhaId %></div>
+                <div class="registered">
+                    Registered on: <%= record.registeredAt %>
+                </div>
+            </div>
+            
+            <div class="patient-info">
+                <div class="info-item">
+                    <div class="info-label">Patient Name</div>
+                    <div class="info-value"><%= record.name || 'Not specified' %></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Blood Type</div>
+                    <div class="info-value"><%= record.bloodType %></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Account Status</div>
+                    <div class="info-value" style="color: #4caf50;">Active ✓</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Consent Management Section -->
+        <div class="consent-section">
+            <h3>🔐 Data Sharing Consent</h3>
+            <p style="color: #666; font-size: 13px; margin-bottom: 15px;">
+                Control who can access your health records across the network:
+            </p>
+            
+            <div class="consent-item <%= record.consents.hospitalSharing ? 'granted' : '' %>">
+                <span class="consent-text">🏥 Hospital & Clinic Data Sharing</span>
+                <span class="consent-status <%= record.consents.hospitalSharing ? 'granted' : 'denied' %>">
+                    <%= record.consents.hospitalSharing ? '✓ Granted' : '✗ Denied' %>
+                </span>
+            </div>
+            
+            <div class="consent-item <%= record.consents.pharmacySharing ? 'granted' : '' %>">
+                <span class="consent-text">💊 Pharmacy Prescriptions Sharing</span>
+                <span class="consent-status <%= record.consents.pharmacySharing ? 'granted' : 'denied' %>">
+                    <%= record.consents.pharmacySharing ? '✓ Granted' : '✗ Denied' %>
+                </span>
+            </div>
+            
+            <div class="consent-item <%= record.consents.emergencyAccess ? 'granted' : '' %>">
+                <span class="consent-text">🚑 Emergency Access (Always Available)</span>
+                <span class="consent-status <%= record.consents.emergencyAccess ? 'granted' : 'denied' %>">
+                    <%= record.consents.emergencyAccess ? '✓ Enabled' : '✗ Disabled' %>
+                </span>
+            </div>
+        </div>
+        
+        <!-- Medical History Section -->
+        <div class="medical-history">
+            <h3>📋 Medical History (Accessible Nationwide)</h3>
+            
+            <% if (record.medicalHistory && record.medicalHistory.length > 0) { %>
+                <% record.medicalHistory.forEach(entry => { %>
+                    <div class="history-item">
+                        <div class="history-header">
+                            <span class="history-disease"><%= entry.disease %></span>
+                            <span class="history-date"><%= entry.date || entry.syncedAt %></span>
+                        </div>
+                        <div class="history-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Consulting Doctor</div>
+                                <div class="detail-value"><%= entry.doctor %></div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Medicines Prescribed</div>
+                                <div class="detail-value">
+                                    <%= (entry.medicines && entry.medicines.length > 0) ? entry.medicines.join(', ') : 'N/A' %>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Consultation Fee</div>
+                                <div class="detail-value">₹<%= entry.bill || 0 %></div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Status</div>
+                                <div class="detail-value">✓ Available</div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="empty-state">
+                    <p>No medical history records found yet.</p>
+                    <p style="font-size: 12px; margin-top: 10px;">Your health records will appear here once you schedule an appointment.</p>
+                </div>
+            <% } %>
+        </div>
+        
+        <!-- Universal Health Coverage Feature -->
+        <div class="uparking-feature">
+            <h4>🌍 Universal Health Coverage (UHC) - Nationwide Portability</h4>
+            <p>
+                Your ABHA ID works across India. Access your complete medical history in any hospital, clinic, or pharmacy. 
+                No more paper records needed. Emergency doctors can instantly see your blood type, allergies, and medical history.
+            </p>
+        </div>
+        
+        <!-- Consent Logs -->
+        <div style="background: white; padding: 25px; border-radius: 15px; margin-top: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h3 style="color: #333; margin-bottom: 15px;">📊 Recent Consent Activity</h3>
+            
+            <% if (consentLogs && consentLogs.length > 0) { %>
+                <% consentLogs.slice(-5).forEach(log => { %>
+                    <div style="padding: 12px; background: #f9f9f9; border-radius: 8px; margin-bottom: 8px; font-size: 13px; border-left: 3px solid #667eea;">
+                        <strong><%= log.consentType %></strong>: 
+                        <span style="<%= log.status === 'Granted' ? 'color: #4caf50;' : 'color: #f44336;' %>">
+                            <%= log.status %>
+                        </span> 
+                        <span style="color: #999;">(<%= new Date(log.timestamp).toLocaleString() %>)</span>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p style="color: #999; font-size: 13px;">No consent activity yet.</p>
+            <% } %>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="btn-group">
+            <button class="btn-primary" onclick="shareRecord()">📤 Share Record</button>
+            <button class="btn-secondary" onclick="downloadRecord()">⬇️ Download PHR</button>
+        </div>
+    </div>
+    
+    <script>
+        function shareRecord() {
+            const abhaId = '<%= record.abhaId %>';
+            const message = `My ABHA ID for health record sharing: ${abhaId}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'ABHA Health Records',
+                    text: message,
+                    url: window.location.href
+                });
+            } else {
+                alert(message);
+            }
+        }
+        
+        function downloadRecord() {
+            alert('Portable Health Record (PHR) will be downloaded as PDF.');
+            // Link to PDF generation endpoint can be added here
+        }
+    </script>
+</body>
+</html>

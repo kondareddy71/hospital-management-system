@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pharmacist Hospital</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3') no-repeat center center/cover;
+        }
+
+        /* Navbar spacing */
+        .navbar {
+            backdrop-filter: blur(10px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 100px;
+        }
+
+        .card-box {
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 320px;
+        }
+        
+         /* About Section */
+    .about-section {
+       padding: 80px 30px;
+       margin: 80px auto;
+       width: 85%;
+       text-align: center;
+
+       background: rgba(255, 255, 255, 0.15);  /* Transparent */
+       backdrop-filter: blur(12px);            /* Glass effect */
+       -webkit-backdrop-filter: blur(12px);
+
+       border-radius: 20px;
+       color: white;
+       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+   }
+
+        /* Doctors */
+        .doctors-section {
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .doctor-card img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        /* Stats */
+        .stats {
+            background: #212529;
+            color: white;
+            padding: 60px 0;
+        }
+
+        /* Departments */
+        .department-box {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .department-box:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #212529;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Pharmacist Hospital</a>
+        <div>
+            <a href="/login" class="btn btn-outline-light me-2">Login</a>
+            <a href="/register" class="btn btn-primary">Register</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<div class="hero-section">
+    <div class="card-box text-center">
+        <h2 class="mb-4">Welcome to Pharmacist Hospital</h2>
+        <p class="mb-4">Advanced Care with Modern Technology</p>
+        <a href="/register" class="btn btn-primary w-100 mb-3">Register</a>
+        <a href="/login" class="btn btn-success w-100">Login</a>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-section">
+    <div class="container">
+        <h2 class="mb-4">About Our Hospital</h2>
+        <p class="lead">
+            Pharmacist Hospital is a multi-speciality healthcare center offering advanced
+            treatment in Cardiology, Neurology, Orthopedics, Pediatrics and 24/7 Emergency
+            Services. We combine modern technology with compassionate care to deliver the
+            highest quality medical services.
+        </p>
+    </div>
+</div>
+
+<!-- DOCTORS -->
+<div class="doctors-section container">
+    <h2 class="mb-5">Our Specialists</h2>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+            <div class="doctor-card">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg">
+                <h5 class="mt-3">Dr. Arjun Reddy</h5>
+                <p>Cardiologist</p>
+            </div>
+             </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="doctor-card">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg">
+                <h5 class="mt-3">Dr. Priya Sharma</h5>
+                <p>Neurologist</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="doctor-card">
+                <img src="https://randomuser.me/api/portraits/men/76.jpg">
+                <h5 class="mt-3">Dr. Rahul Verma</h5>
+                <p>Orthopedic</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- STATISTICS -->
+<div class="stats text-center">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h2>15+</h2>
+                <p>Expert Doctors</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2>5000+</h2>
+                <p>Happy Patients</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2>24/7</h2>
+                <p>Emergency Services</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2>10+</h2>
+                <p>Years Experience</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- DEPARTMENTS -->
+<div class="container py-5 text-center">
+    <h2 class="mb-5">Our Departments</h2>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="department-box">
+                <h4>Cardiology</h4>
+                <p>Advanced heart care and cardiac surgeries with modern equipment.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="department-box">
+                <h4>Neurology</h4>
+                <p>Specialized brain and nervous system treatments.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="department-box">
+                <h4>Orthopedics</h4>
+                <p>Comprehensive bone, joint and muscle care solutions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<div class="bg-light py-5 text-center">
+    <div class="container">
+        <h2 class="mb-4">Why Choose Us?</h2>
+        <p class="lead">
+            ✔ Modern Medical Equipment <br>
+            ✔ Highly Qualified Specialists <br>
+            ✔ Affordable Healthcare <br>
+            ✔ Digital Appointment & Billing System <br>
+            ✔ 24/7 Emergency Support
+        </p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center">
+    <p>© 2026 Pharmacist Hospital | All Rights Reserved</p>
+    <p>Email: info@pharmacisthospital.com | Phone: +91 98765 43210</p>
+</footer>
+
+</body>
+</html>
